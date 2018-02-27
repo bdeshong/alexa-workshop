@@ -1,92 +1,128 @@
 {
-    "interactionModel":{
-        "languageModel":{
-            "invocationName":"my countdown",
-            "types":[
-                {
-                    "name": "EVENT",
-                    "values": [
-                        {
-                            "id": "anniversary",
-                            "name": {
-                                "value": "anniversary",
-                                "synonyms": []
-                            }
-                        },
-                        {
-                            "id": "wedding",
-                            "name": {
-                                "value": "wedding",
-                                "synonyms": []
-                            }
-                        },
-                        {
-                            "id": "birthday",
-                            "name": {
-                                "value": "birthday",
-                                "synonyms": []
-                            }
-                        }
-                    ]
-                }
-            ],
-            "intents":[
-                {
-                  "name": "AMAZON.CancelIntent",
-                  "samples": []
-                },
-                {
-                  "name": "AMAZON.HelpIntent",
-                  "samples": []
-                },
-                {
-                  "name": "AMAZON.StopIntent",
-                  "samples": []
-                },
-                {
-                    "name": "CountdownIntent",
-                    "slots": [
-                        {
-                            "name": "event",
-                            "type": "EVENT"
-                        },
-                        {
-                            "name": "eventDate",
-                            "type": "AMAZON.DATE"
-                        }
-                    ],
-                    "samples": [
-                        "how many days until my {event}",
-                        "how long until {eventDate}",
-                        "when is my {event}"
-                    ]
-                },
-                {
-                    "name":"HelloWorldIntent",
-                    "slots":[
-
-                    ],
-                    "samples":[
-                        "hello",
-                        "say hello",
-                        "say hello world"
-                    ]
-                },
-                {
-                    "name":"MyNameIsIntent",
-                    "slots":[
-                        {
-                            "name":"name",
-                            "type":"AMAZON.US_FIRST_NAME"
-                        }
-                    ],
-                    "samples":[
-                        "my name is {name}",
-                        "i am {name}",
-                        "you can call me {name}"
-                    ]
-                }
-            ]
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "my countdown",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "CountdownIntent",
+          "slots": [
+            {
+              "name": "event",
+              "type": "EVENT"
+            },
+            {
+              "name": "eventDate",
+              "type": "AMAZON.DATE",
+              "samples": [
+                "December first"
+              ]
+            }
+          ],
+          "samples": [
+            "how many days until my {event}",
+            "how long until {eventDate}",
+            "when is my {event} on {eventDate}"
+          ]
+        },
+        {
+          "name": "HelloWorldIntent",
+          "samples": [
+            "hello",
+            "say hello",
+            "say hello world"
+          ]
+        },
+        {
+          "name": "MyNameIsIntent",
+          "slots": [
+            {
+              "name": "name",
+              "type": "AMAZON.US_FIRST_NAME"
+            }
+          ],
+          "samples": [
+            "my name is {name}",
+            "i am {name}",
+            "you can call me {name}"
+          ]
         }
-    }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "id": "anniversary",
+              "name": {
+                "value": "anniversary",
+                "synonyms": []
+              }
+            },
+            {
+              "id": "wedding",
+              "name": {
+                "value": "wedding",
+                "synonyms": []
+              }
+            },
+            {
+              "id": "birthday",
+              "name": {
+                "value": "birthday",
+                "synonyms": []
+              }
+            }
+          ],
+          "name": "EVENT"
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "CountdownIntent",
+          "confirmationRequired": false,
+          "slots": [
+            {
+              "name": "event",
+              "type": "EVENT",
+              "elicitationRequired": false,
+              "confirmationRequired": false
+            },
+            {
+              "name": "eventDate",
+              "type": "AMAZON.DATE",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1359151017537.1160952479120"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.1359151017537.1160952479120",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "On what date?"
+          }
+        ]
+      }
+    ]
+  }
 }

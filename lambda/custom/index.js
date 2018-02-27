@@ -50,8 +50,25 @@ var handlers = {
     'CountdownIntent' : function() {
         console.log(this.event.request.intent.slots);
 
-        var c = new Calculator();
-        this.response.speak(c.Calculate(this.event.request.intent.slots.eventDate.value));
+        if (this.event.request.dialogState == "STARTED" || this.event.request.dialogState == "IN_PROGRESS"){
+            // We're missing eventDate, so delegate to collect what we're
+            // missing.
+            this.context.succeed({
+                "response": {
+                    "directives": [
+                        {
+                            "type": "Dialog.Delegate"
+                        }
+                    ],
+                    "shouldEndSession": false
+                },
+                "sessionAttributes": {}
+            });
+        } else {
+            var c = new Calculator();
+            this.response.speak(c.Calculate(this.event.request.intent.slots.eventDate.value));
+        }
+
         this.emit(':responseReady');
     },
     'Unhandled' : function() {
