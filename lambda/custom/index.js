@@ -48,8 +48,10 @@ var handlers = {
         this.emit(':responseReady');
     },
     'CountdownIntent' : function() {
+        console.log(this.event.request.intent.slots);
+
         var c = new Calculator();
-        this.response.speak(c.Calculate(5, 10));
+        this.response.speak(c.Calculate(this.event.request.intent.slots.eventDate.value));
         this.emit(':responseReady');
     },
     'Unhandled' : function() {
@@ -60,9 +62,9 @@ var handlers = {
 
 class Calculator
 {
-    Calculate(month, day) {
+    Calculate(date) {
         var moment = require('moment');
-        var myDate = moment([2018, month - 1, day]);
+        var myDate = moment(date);
         var now = moment();
 
         return myDate.diff(now, 'days') + ' days';
