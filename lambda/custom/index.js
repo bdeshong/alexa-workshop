@@ -50,7 +50,7 @@ var handlers = {
         this.emit(':responseReady');
     },
     'CountdownIntent' : function() {
-        this.response.speak(Calculator.calculate(5, 10));
+        this.response.speak(Calculator.Calculate(5, 10));
         this.emit(':responseReady');
     },
     'Unhandled' : function() {
