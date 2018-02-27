@@ -1,6 +1,6 @@
-##Read Me
+## Read Me
 
-#Countdown
+# Countdown
 
 Countdown is an Alexa skill to determine how many days until an event.
 
