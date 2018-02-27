@@ -4,8 +4,6 @@ var Alexa = require("alexa-sdk");
 // For detailed tutorial on how to making a Alexa skill,
 // please visit us at http://alexa.design/build
 
-require('./Calculator');
-
 exports.handler = function(event, context) {
     var alexa = Alexa.handler(event, context);
     alexa.registerHandlers(handlers);
@@ -60,3 +58,13 @@ var handlers = {
     }
 };
 
+class Calculator
+{
+    Calculate(month, day) {
+        var moment = require('moment');
+        var myDate = moment([2018, month - 1, day]);
+        var now = moment();
+
+        return myDate.diff(now, 'days') + ' days';
+    }
+}
