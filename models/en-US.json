@@ -1,7 +1,7 @@
 {
     "interactionModel":{
         "languageModel":{
-            "invocationName":"countdown",
+            "invocationName":"my countdown",
             "types":[],
             "intents":[
                 {
