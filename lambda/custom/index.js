@@ -1,11 +1,19 @@
 'use strict';
 var Alexa = require("alexa-sdk");
+var AWS = require("aws-sdk");
+
+AWS.config.update({
+    region: 'us-east-1'
+});
+
+var dynamoDb = new AWS.DynamoDB();
 
 // For detailed tutorial on how to making a Alexa skill,
 // please visit us at http://alexa.design/build
 
 exports.handler = function(event, context) {
     var alexa = Alexa.handler(event, context);
+    //alexa.dynamoDBTableName = 'alexa-countdown';
     alexa.registerHandlers(handlers);
     alexa.execute();
 };
@@ -67,6 +75,39 @@ var handlers = {
         } else {
             var c = new Calculator();
             this.response.speak(c.Calculate(this.event.request.intent.slots.eventDate.value));
+        }
+
+        if (this.event.request.intent.slots.event.value !== undefined &&
+            this.event.request.intent.slots.eventDate.value !== undefined
+        ) {
+            // Store to DynamoDB
+            var params = {
+                'TableName': 'alexa-countdown',
+                'Item': {
+                    'userId': {'S': this.event.session.user.userId},
+                    'event': {'S': this.event.request.intent.slots.event.value},
+                    'eventDate': {'S': this.event.request.intent.slots.eventDate.value}
+                }
+            };
+
+            console.log("params");
+            console.log(params);
+
+            dynamoDb.putItem(params, function (error, data) {
+                console.log("in callback: data");
+                console.log(data);
+
+                console.log("in callback: error");
+                console.log(error);
+
+                if (error) {
+                    console.error("failed to persist; " + error);
+                } else {
+                    console.log("persisted successfully");
+                }
+            });
+
+            console.log("down here after dynamoDb call");
         }
 
         this.emit(':responseReady');
