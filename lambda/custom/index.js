@@ -4,6 +4,7 @@ var Alexa = require("alexa-sdk");
 // For detailed tutorial on how to making a Alexa skill,
 // please visit us at http://alexa.design/build
 
+import { Calculator } from "./calc.js";
 
 exports.handler = function(event, context) {
     var alexa = Alexa.handler(event, context);
@@ -57,3 +58,4 @@ var handlers = {
             " or 'alexa, ask hello world my name is awesome Aaron'");
     }
 };
+
