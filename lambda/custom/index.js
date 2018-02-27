@@ -48,6 +48,10 @@ var handlers = {
         this.response.speak('Bye');
         this.emit(':responseReady');
     },
+    'CountdownIntent' : function() {
+        this.response.speak("I'm not ready to calculate that");
+        this.emit(':responseReady');
+    },
     'Unhandled' : function() {
         this.response.speak("Sorry, I didn't get that. You can try: 'alexa, hello world'" +
             " or 'alexa, ask hello world my name is awesome Aaron'");
