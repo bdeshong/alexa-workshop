@@ -4,7 +4,7 @@ var Alexa = require("alexa-sdk");
 // For detailed tutorial on how to making a Alexa skill,
 // please visit us at http://alexa.design/build
 
-import { Calculator } from "./calc";
+require('./Calculator');
 
 exports.handler = function(event, context) {
     var alexa = Alexa.handler(event, context);
@@ -50,7 +50,8 @@ var handlers = {
         this.emit(':responseReady');
     },
     'CountdownIntent' : function() {
-        this.response.speak(Calculator.Calculate(5, 10));
+        var c = new Calculator();
+        this.response.speak(c.Calculate(5, 10));
         this.emit(':responseReady');
     },
     'Unhandled' : function() {
