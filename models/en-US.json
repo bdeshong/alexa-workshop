@@ -2,7 +2,34 @@
     "interactionModel":{
         "languageModel":{
             "invocationName":"my countdown",
-            "types":[],
+            "types":[
+                {
+                    "name": "EVENT",
+                    "values": [
+                        {
+                            "id": "anniversary",
+                            "name": {
+                                "value": "anniversary",
+                                "synonyms": []
+                            }
+                        },
+                        {
+                            "id": "wedding",
+                            "name": {
+                                "value": "wedding",
+                                "synonyms": []
+                            }
+                        },
+                        {
+                            "id": "birthday",
+                            "name": {
+                                "value": "birthday",
+                                "synonyms": []
+                            }
+                        }
+                    ]
+                }
+            ],
             "intents":[
                 {
                   "name": "AMAZON.CancelIntent",
@@ -15,6 +42,24 @@
                 {
                   "name": "AMAZON.StopIntent",
                   "samples": []
+                },
+                {
+                    "name": "CountdownIntent",
+                    "slots": [
+                        {
+                            "name": "event",
+                            "type": "EVENT"
+                        },
+                        {
+                            "name": "eventDate",
+                            "type": "AMAZON.DATE"
+                        }
+                    ],
+                    "samples": [
+                        "how many days until my {event}",
+                        "how long until {eventDate}",
+                        "when is my {event}"
+                    ]
                 },
                 {
                     "name":"HelloWorldIntent",
